@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humanoid Robot Head Interface</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Humanoid Robot Interface</h1>
+        <button id="btn-settings" aria-label="Settings" class="icon-btn">⚙️ Settings</button>
+    </header>
+    
+    <main class="dashboard">
+        <!-- Video Panel -->
+        <section class="panel video-panel" aria-label="Camera Feed">
+            <header class="panel-header">
+                <h2>Visual Input</h2>
+                <div class="status-indicators">
+                    <span id="face-badge" class="badge">Face: <span class="value">--</span></span>
+                    <span id="emotion-badge" class="badge">Emotion: <span class="value">--</span></span>
+                </div>
+            </header>
+            
+            <div class="video-container">
+                <video id="camera-feed" autoplay playsinline muted></video>
+                <canvas id="camera-canvas" hidden></canvas>
+                <div id="video-placeholder" class="placeholder-overlay">
+                    <p>Camera Off</p>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="btn-start-camera" class="btn primary">Start Camera</button>
+                <button id="btn-stop-camera" class="btn secondary" disabled>Stop Camera</button>
+                <button id="btn-capture" class="btn" disabled>Capture Frame</button>
+            </div>
+        </section>
+
+        <!-- Speech & Chat Panel -->
+        <section class="panel interaction-panel">
+            <div class="speech-section">
+                <h2>Audio Input</h2>
+                <div class="controls">
+                    <button id="btn-start-mic" class="btn primary">Start Mic</button>
+                    <button id="btn-stop-mic" class="btn secondary" disabled>Stop Mic</button>
+                </div>
+                <div class="transcript-box">
+                    <label for="transcript-display">Live Transcript:</label>
+                    <p id="transcript-display" class="scrolling-text">Waiting for speech...</p>
+                </div>
+            </div>
+
+            <div class="chat-section">
+                <h2>Conversation</h2>
+                <div id="chat-log" class="chat-log" role="log" aria-live="polite">
+                    <!-- Messages will appear here -->
+                </div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Type a message..." aria-label="Type a message">
+                    <button id="btn-send" class="btn primary">Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Panel -->
+        <section class="panel response-panel">
+            <h2>Robot Response</h2>
+            <div class="response-display">
+                <p id="nlp-response-text" class="response-text">System Ready.</p>
+            </div>
+            <div class="controls">
+                <button id="btn-tts-speak" class="btn" disabled>Replay TTS</button>
+                <button id="btn-tts-stop" class="btn secondary" disabled>Stop TTS</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Settings Modal -->
+    <dialog id="settings-modal">
+        <form method="dialog">
+            <h3>Configuration</h3>
+            <div class="setting-item">
+                <label class="toggle">
+                    <input type="checkbox" id="chk-use-browser-apis" checked>
+                    <span class="label-text">Use Browser Native APIs (ASR/TTS)</span>
+                </label>
+                <p class="hint">If unchecked, the system will use simulation stubs intended for server-side integration.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn primary">Close</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
